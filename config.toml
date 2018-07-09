@@ -1,2 +1,14 @@
+# Nanotap configuration file
+# Lines starting with '#' are ignored
+# Customize to your needs
+
+# Path to the touchscreen input device.
+# Use "auto" to auto-detect (may not work for all devices).
 input = "/dev/input/event0"
+
+# Maximum number of fingers to support tracking.
+# If you use more than this, additional fingers will be ignored.
+# 10 is a safe value as almost no touchscreens can recognize more.
 max_fingers = 10
+
+# End of Nanotap configuration file
