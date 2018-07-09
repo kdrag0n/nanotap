@@ -24,21 +24,14 @@ func main() {
 	for {
 		event := <-eventChan
 
-		status := "down"
-		if event.Type == EvFingerUp {
-			status = "up"
-		}
-
 		var typeStr string
 		switch event.Type {
 		case EvFingerDown:
-			typeStr = "FingerDown"
+			typeStr = "down"
 		case EvFingerUp:
-			typeStr = "FingerUp"
-		case EvFingerMove:
-			typeStr = "FingerMove"
+			typeStr = "up"
 		}
 
-		fmt.Printf("Finger %d %s @ (%d, %d); %s\n", event.Finger, status, event.X, event.Y, typeStr)
+		fmt.Printf("Finger %d (%4d, %4d) %s\n", event.Finger, event.X, event.Y, typeStr)
 	}
 }
