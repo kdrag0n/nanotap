@@ -12,8 +12,9 @@ func check(e error) {
 }
 
 func main() {
-	config, err := LoadConfigFile("config.toml")
-	check(err)
+	//config, err := LoadConfigFile("config.toml")
+	//check(err)
+	config := Config{MaxFingers: 10, InputDevice: "/dev/input/event1"}
 
 	f, err := os.Open(config.InputDevice)
 	check(err)
@@ -24,14 +25,21 @@ func main() {
 	for {
 		event := <-eventChan
 
+		status := "down"
+		if event.Type == EvFingerUp {
+			status = "up"
+		}
+
 		var typeStr string
 		switch event.Type {
 		case EvFingerDown:
-			typeStr = "down"
+			typeStr = "FingerDown"
 		case EvFingerUp:
-			typeStr = "up"
+			typeStr = "FingerUp"
+		case EvFingerMove:
+			typeStr = "FingerMove"
 		}
 
-		fmt.Printf("Finger %d (%4d, %4d) %s\n", event.Finger, event.X, event.Y, typeStr)
+		fmt.Printf("Finger %d %s @ (%d, %d); %s\n", event.Finger, status, event.X, event.Y, typeStr)
 	}
 }
