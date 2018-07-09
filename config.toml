@@ -4,7 +4,7 @@
 
 # Path to the touchscreen input device.
 # Use "auto" to auto-detect (may not work for all devices).
-input = "/dev/input/event0"
+input = "auto"
 
 # Maximum number of fingers to support tracking.
 # If you use more than this, additional fingers will be ignored.

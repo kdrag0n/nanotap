@@ -10,6 +10,12 @@ func check(e error) {
 	}
 }
 
+func checkMsg(e error, msg string) {
+	if e != nil {
+		log.Panic().Err(e).Msg(msg)
+	}
+}
+
 func main() {
 	config, err := LoadConfigFile("config.toml")
 	if err != nil {
@@ -17,6 +23,14 @@ func main() {
 		config = DefaultConfig
 	}
 	log.Print("Loaded config")
+
+	if config.InputDevice == "auto" {
+		log.Print("Auto-detecting input device...")
+		path, err := ProbeInputDevice()
+		checkMsg(err, "Unable to find valid input device")
+
+		config.InputDevice = path
+	}
 
 	f, err := os.Open(config.InputDevice)
 	check(err)
