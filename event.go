@@ -1,8 +1,6 @@
 package main
 
 import (
-	"errors"
-	"fmt"
 	"os"
 	"time"
 	"unsafe"
@@ -16,6 +14,9 @@ func DecodeRawEvent(r RawEvent) (ev Event, err error) {
 		switch r.Code {
 		case RawBtnTouch:
 			ev.FingerDown = r.Value == 1
+		default:
+			err = ErrUnknownCode
+			return
 		}
 
 	case RawEvAbs:
@@ -26,14 +27,16 @@ func DecodeRawEvent(r RawEvent) (ev Event, err error) {
 			ev.X = r.Value
 		case RawAbsMtPositionY:
 			ev.Y = r.Value
+		default:
+			err = ErrUnknownCode
+			return
 		}
 
 		if ev.Type == 0 {
 			ev.Type = EvFingerMove
 		}
 	default:
-		err = errors.New("Unknown event type")
-		fmt.Println("ignore")
+		err = ErrUnknownType
 	}
 
 	return
