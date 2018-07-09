@@ -18,7 +18,7 @@ func init() {
 		zlog.Logger = zlog.Output(zerolog.ConsoleWriter{Out: os.Stdout})
 	}
 
-	dwr := diode.NewWriter(os.Stdout, 1000, 10*time.Millisecond, func(missed int) {
+	dwr := diode.NewWriter(os.Stdout, 1024, 10*time.Millisecond, func(missed int) {
 		zlog.Warn().Int("count", missed).Msg("Dropped messages")
 	})
 
