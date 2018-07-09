@@ -48,7 +48,7 @@ func DecodeRawEvent(r RawEvent, ev *Event) (err error) {
 	return
 }
 
-func ReadEvents(maxFingers int, f *os.File, ch chan Event) {
+func ReadEvents(maxFingers uint32, f *os.File, ch chan Event) {
 	buf := make([]byte, RawEventSize)
 	slots := make([]*Event, maxFingers)
 	var currentSlot uint32

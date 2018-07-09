@@ -1,0 +1,2 @@
+input = "/dev/input/event0"
+max_fingers = 10

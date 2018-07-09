@@ -12,11 +12,14 @@ func check(e error) {
 }
 
 func main() {
-	f, err := os.Open("/dev/input/event0")
+	config, err := LoadConfigFile("config.toml")
+	check(err)
+
+	f, err := os.Open(config.InputDevice)
 	check(err)
 
 	eventChan := make(chan Event)
-	go ReadEvents(10, f, eventChan)
+	go ReadEvents(config.MaxFingers, f, eventChan)
 
 	for {
 		event := <-eventChan
