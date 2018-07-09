@@ -13,7 +13,13 @@ func DecodeRawEvent(r RawEvent) (ev Event, err error) {
 	case RawEvKey:
 		switch r.Code {
 		case RawBtnTouch:
-			ev.FingerDown = r.Value == 1
+			if r.Value == 1 {
+				ev.FingerDown = true
+				ev.Type = EvFingerDown
+			} else {
+				ev.FingerDown = false
+				ev.Type = EvFingerUp
+			}
 		default:
 			err = ErrUnknownCode
 			return
