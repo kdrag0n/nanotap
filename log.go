@@ -1,24 +1,29 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"time"
 
 	"github.com/mattn/go-isatty"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/diode"
+	zlog "github.com/rs/zerolog/log"
 )
 
 var log zerolog.Logger
 
 func init() {
+	isTerminal := isatty.IsTerminal(os.Stdout.Fd())
+	if isTerminal {
+		zlog.Logger = zlog.Output(zerolog.ConsoleWriter{Out: os.Stdout})
+	}
+
 	dwr := diode.NewWriter(os.Stdout, 1000, 10*time.Millisecond, func(missed int) {
-		fmt.Printf("Dropped %d messages", missed)
+		zlog.Warn().Int("count", missed).Msg("Dropped messages")
 	})
 
 	log = zerolog.New(dwr)
-	if isatty.IsTerminal(os.Stdout.Fd()) {
+	if isTerminal {
 		log = log.Output(zerolog.ConsoleWriter{Out: os.Stdout})
 	}
 }
