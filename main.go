@@ -1,45 +1,45 @@
 package main
 
 import (
-	"fmt"
 	"os"
 )
 
 func check(e error) {
 	if e != nil {
-		panic(e)
+		log.Panic().Err(e).Msg("Fatal error")
 	}
 }
 
 func main() {
-	//config, err := LoadConfigFile("config.toml")
-	//check(err)
-	config := Config{MaxFingers: 10, InputDevice: "/dev/input/event1"}
+	config, err := LoadConfigFile("config.toml")
+	if err != nil {
+		log.Warn().Err(err).Msg("Unable to load config, using defaults")
+		config = DefaultConfig
+	}
+	log.Print("Loaded config")
 
 	f, err := os.Open(config.InputDevice)
 	check(err)
+	log.Debug().Str("device", config.InputDevice).Msg("Opened input device")
 
 	eventChan := make(chan Event)
 	go ReadEvents(config.MaxFingers, f, eventChan)
+	log.Print("Started event reader")
 
+	log.Info().Msg("Getting events")
 	for {
 		event := <-eventChan
-
-		status := "down"
-		if event.Type == EvFingerUp {
-			status = "up"
-		}
 
 		var typeStr string
 		switch event.Type {
 		case EvFingerDown:
-			typeStr = "FingerDown"
+			typeStr = "down"
 		case EvFingerUp:
-			typeStr = "FingerUp"
+			typeStr = "up"
 		case EvFingerMove:
-			typeStr = "FingerMove"
+			typeStr = "move"
 		}
 
-		fmt.Printf("Finger %d %s @ (%d, %d); %s\n", event.Finger, status, event.X, event.Y, typeStr)
+		log.Printf("Finger %d (%4d, %4d) %s", event.Finger, event.X, event.Y, typeStr)
 	}
 }

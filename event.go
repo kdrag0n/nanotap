@@ -7,7 +7,7 @@ import (
 )
 
 func DecodeRawEvent(r RawEvent, ev *Event) (err error) {
-	ev.Time = time.Unix(r.Seconds, r.Microseconds*1000)
+	ev.Time = time.Unix(r.Time.Sec, r.Time.Usec*1000)
 
 	switch r.Type {
 	case RawEvKey:

@@ -6,16 +6,18 @@ import (
 	toml "github.com/pelletier/go-toml"
 )
 
+var DefaultConfig = Config{
+	InputDevice: "/dev/input/event0",
+	MaxFingers:  10,
+}
+
 type Config struct {
 	InputDevice string `toml:"input"`
 	MaxFingers  uint32 `toml:"max_fingers"`
 }
 
 func ParseConfig(doc []byte) (config Config, err error) {
-	config = Config{
-		InputDevice: "/dev/input/event0",
-		MaxFingers:  10,
-	}
+	config = DefaultConfig
 
 	err = toml.Unmarshal(doc, &config)
 	return

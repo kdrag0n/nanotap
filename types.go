@@ -1,16 +1,16 @@
 package main
 
 import (
+	"syscall"
 	"time"
 	"unsafe"
 )
 
 type RawEvent struct {
-	Seconds      int64
-	Microseconds int64
-	Type         uint16
-	Code         uint16
-	Value        uint32
+	Time  syscall.Timeval
+	Type  uint16
+	Code  uint16
+	Value uint32
 }
 
 var _sREvent RawEvent
