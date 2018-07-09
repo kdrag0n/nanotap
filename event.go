@@ -72,6 +72,9 @@ func ReadEvents(maxFingers uint32, f *os.File, ch chan Event) {
 		}
 
 		currentSlot = event.Finger
+		if currentSlot > maxFingers-1 {
+			currentSlot = maxFingers - 1
+		}
 
 		ch <- *event
 	}
