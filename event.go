@@ -6,7 +6,7 @@ import (
 	"unsafe"
 )
 
-func DecodeRawEvent(r RawEvent) (ev Event, err error) {
+func DecodeRawEvent(r RawEvent, ev *Event) (err error) {
 	ev.Time = time.Unix(r.Seconds, r.Microseconds*1000)
 
 	switch r.Type {
@@ -50,6 +50,7 @@ func DecodeRawEvent(r RawEvent) (ev Event, err error) {
 
 func ReadEvents(f *os.File, ch chan Event) {
 	buf := make([]byte, RawEventSize)
+	var event Event
 
 	for {
 		_, err := f.Read(buf)
@@ -57,7 +58,7 @@ func ReadEvents(f *os.File, ch chan Event) {
 
 		bufDataPtr := *(*uintptr)(unsafe.Pointer(&buf))
 		rawEvent := *(*RawEvent)(unsafe.Pointer(bufDataPtr))
-		event, err := DecodeRawEvent(rawEvent)
+		err = DecodeRawEvent(rawEvent, &event)
 		if err != nil {
 			continue
 		}
