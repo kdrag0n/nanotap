@@ -2,14 +2,45 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "github.com/gvalkov/golang-evdev"
+  packages = ["."]
+  revision = "b6f418b1fe5af0386c81f387227f36d4801883b0"
+
+[[projects]]
+  name = "github.com/mattn/go-isatty"
+  packages = ["."]
+  revision = "0360b2af4f38e8d38c7fce2a9f4e702702d73a39"
+  version = "v0.0.3"
+
+[[projects]]
   name = "github.com/pelletier/go-toml"
   packages = ["."]
   revision = "c01d1270ff3e442a8a57cddc1c92dc1138598194"
   version = "v1.2.0"
 
+[[projects]]
+  name = "github.com/rs/zerolog"
+  packages = [
+    ".",
+    "diode",
+    "diode/internal/diodes",
+    "internal/cbor",
+    "internal/json",
+    "log"
+  ]
+  revision = "77db4b4f350e31be66a57c332acb7721cf9ff9bb"
+  version = "v1.8.0"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["unix"]
+  revision = "1b2967e3c290b7c545b3db0deeda16e9be4f98a2"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7fec16cb8eb19d93720b3c9e64c6ee6b025b02de06c9626d2c71eeed5ea3dffa"
+  inputs-digest = "2c0485ec724aa76751bc9644607a7c31ab9cb489f2e88a03048d8494034813d5"
   solver-name = "gps-cdcl"
   solver-version = 1
