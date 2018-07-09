@@ -1,12 +1,14 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"os"
 	"time"
 	"unsafe"
 )
 
-func DecodeRawEvent(r RawEvent) (ev Event) {
+func DecodeRawEvent(r RawEvent) (ev Event, err error) {
 	ev.Time = time.Unix(r.Seconds, r.Microseconds*1000)
 
 	switch r.Type {
@@ -29,6 +31,9 @@ func DecodeRawEvent(r RawEvent) (ev Event) {
 		if ev.Type == 0 {
 			ev.Type = EvFingerMove
 		}
+	default:
+		err = errors.New("Unknown event type")
+		fmt.Println("ignore")
 	}
 
 	return
@@ -43,7 +48,10 @@ func ReadEvents(f *os.File, ch chan Event) {
 
 		bufDataPtr := *(*uintptr)(unsafe.Pointer(&buf))
 		rawEvent := *(*RawEvent)(unsafe.Pointer(bufDataPtr))
-		event := DecodeRawEvent(rawEvent)
+		event, err := DecodeRawEvent(rawEvent)
+		if err != nil {
+			continue
+		}
 
 		ch <- event
 	}
