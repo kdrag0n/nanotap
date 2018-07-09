@@ -16,7 +16,7 @@ func main() {
 	check(err)
 
 	eventChan := make(chan Event)
-	go ReadEvents(f, eventChan)
+	go ReadEvents(10, f, eventChan)
 
 	for {
 		event := <-eventChan

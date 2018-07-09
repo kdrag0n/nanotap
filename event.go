@@ -48,9 +48,16 @@ func DecodeRawEvent(r RawEvent, ev *Event) (err error) {
 	return
 }
 
-func ReadEvents(f *os.File, ch chan Event) {
+func ReadEvents(maxFingers int, f *os.File, ch chan Event) {
 	buf := make([]byte, RawEventSize)
-	var event Event
+	slots := make([]*Event, maxFingers)
+	var currentSlot uint32
+
+	for slot, _ := range slots {
+		slots[slot] = &Event{
+			Finger: uint32(slot),
+		}
+	}
 
 	for {
 		_, err := f.Read(buf)
@@ -58,11 +65,14 @@ func ReadEvents(f *os.File, ch chan Event) {
 
 		bufDataPtr := *(*uintptr)(unsafe.Pointer(&buf))
 		rawEvent := *(*RawEvent)(unsafe.Pointer(bufDataPtr))
-		err = DecodeRawEvent(rawEvent, &event)
+		event := slots[currentSlot]
+		err = DecodeRawEvent(rawEvent, event)
 		if err != nil {
 			continue
 		}
 
-		ch <- event
+		currentSlot = event.Finger
+
+		ch <- *event
 	}
 }
