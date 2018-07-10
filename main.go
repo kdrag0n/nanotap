@@ -26,7 +26,7 @@ func main() {
 
 	if config.InputDevice == "auto" {
 		log.Print("Auto-detecting input device...")
-		path, err := ProbeInputDevice()
+		path, err := ProbeInputDevice(1)
 		checkMsg(err, "Unable to find valid input device")
 
 		config.InputDevice = path
