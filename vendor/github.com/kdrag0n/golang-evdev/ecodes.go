@@ -11,7 +11,7 @@
 //   evdev.EV[evdev.EV_KEY]  // "EV_KEY"
 //   evdev.ByEventType[EV_REL][0]  // "REL_X"
 //
-// Generated on: Linux 4.7.4-200.fc24.x86_64 #1 SMP Thu Sep 15 18:42:09 UTC 2016 x86_64
+// Generated on: Linux 4.17.0-pf2 #1 SMP PREEMPT Sat Jun 23 11:22:26 UTC 2018 x86_64
 
 package evdev
 
@@ -44,6 +44,7 @@ const (
 	BUS_SPI                      = 0x1C
 	BUS_RMI                      = 0x1D
 	BUS_CEC                      = 0x1E
+	BUS_INTEL_ISHTP              = 0x1F
 	FF_STATUS_STOPPED            = 0x00
 	FF_STATUS_PLAYING            = 0x01
 	FF_STATUS_MAX                = 0x01
@@ -399,6 +400,7 @@ const (
 	BTN_TOOL_MOUSE               = 0x146
 	BTN_TOOL_LENS                = 0x147
 	BTN_TOOL_QUINTTAP            = 0x148
+	BTN_STYLUS3                  = 0x149
 	BTN_TOUCH                    = 0x14a
 	BTN_STYLUS                   = 0x14b
 	BTN_STYLUS2                  = 0x14c
@@ -571,6 +573,7 @@ const (
 	BTN_DPAD_LEFT                = 0x222
 	BTN_DPAD_RIGHT               = 0x223
 	KEY_ALS_TOGGLE               = 0x230
+	KEY_ROTATE_LOCK_TOGGLE       = 0x231
 	KEY_BUTTONCONFIG             = 0x240
 	KEY_TASKMANAGER              = 0x241
 	KEY_JOURNAL                  = 0x242
@@ -578,6 +581,7 @@ const (
 	KEY_APPSELECT                = 0x244
 	KEY_SCREENSAVER              = 0x245
 	KEY_VOICECOMMAND             = 0x246
+	KEY_ASSISTANT                = 0x247
 	KEY_BRIGHTNESS_MIN           = 0x250
 	KEY_BRIGHTNESS_MAX           = 0x251
 	KEY_KBDINPUTASSIST_PREV      = 0x260
@@ -603,7 +607,8 @@ const (
 	KEY_UNMUTE                   = 0x274
 	KEY_FASTREVERSE              = 0x275
 	KEY_SLOWREVERSE              = 0x276
-	KEY_DATA                     = 0x275
+	KEY_DATA                     = 0x277
+	KEY_ONSCREEN_KEYBOARD        = 0x278
 	BTN_TRIGGER_HAPPY            = 0x2c0
 	BTN_TRIGGER_HAPPY1           = 0x2c0
 	BTN_TRIGGER_HAPPY2           = 0x2c1
@@ -773,6 +778,7 @@ var ecodes = map[string]int{
 	"BUS_SPI":                      BUS_SPI,
 	"BUS_RMI":                      BUS_RMI,
 	"BUS_CEC":                      BUS_CEC,
+	"BUS_INTEL_ISHTP":              BUS_INTEL_ISHTP,
 	"FF_STATUS_STOPPED":            FF_STATUS_STOPPED,
 	"FF_STATUS_PLAYING":            FF_STATUS_PLAYING,
 	"FF_STATUS_MAX":                FF_STATUS_MAX,
@@ -1128,6 +1134,7 @@ var ecodes = map[string]int{
 	"BTN_TOOL_MOUSE":               BTN_TOOL_MOUSE,
 	"BTN_TOOL_LENS":                BTN_TOOL_LENS,
 	"BTN_TOOL_QUINTTAP":            BTN_TOOL_QUINTTAP,
+	"BTN_STYLUS3":                  BTN_STYLUS3,
 	"BTN_TOUCH":                    BTN_TOUCH,
 	"BTN_STYLUS":                   BTN_STYLUS,
 	"BTN_STYLUS2":                  BTN_STYLUS2,
@@ -1300,6 +1307,7 @@ var ecodes = map[string]int{
 	"BTN_DPAD_LEFT":                BTN_DPAD_LEFT,
 	"BTN_DPAD_RIGHT":               BTN_DPAD_RIGHT,
 	"KEY_ALS_TOGGLE":               KEY_ALS_TOGGLE,
+	"KEY_ROTATE_LOCK_TOGGLE":       KEY_ROTATE_LOCK_TOGGLE,
 	"KEY_BUTTONCONFIG":             KEY_BUTTONCONFIG,
 	"KEY_TASKMANAGER":              KEY_TASKMANAGER,
 	"KEY_JOURNAL":                  KEY_JOURNAL,
@@ -1307,6 +1315,7 @@ var ecodes = map[string]int{
 	"KEY_APPSELECT":                KEY_APPSELECT,
 	"KEY_SCREENSAVER":              KEY_SCREENSAVER,
 	"KEY_VOICECOMMAND":             KEY_VOICECOMMAND,
+	"KEY_ASSISTANT":                KEY_ASSISTANT,
 	"KEY_BRIGHTNESS_MIN":           KEY_BRIGHTNESS_MIN,
 	"KEY_BRIGHTNESS_MAX":           KEY_BRIGHTNESS_MAX,
 	"KEY_KBDINPUTASSIST_PREV":      KEY_KBDINPUTASSIST_PREV,
@@ -1333,6 +1342,7 @@ var ecodes = map[string]int{
 	"KEY_FASTREVERSE":              KEY_FASTREVERSE,
 	"KEY_SLOWREVERSE":              KEY_SLOWREVERSE,
 	"KEY_DATA":                     KEY_DATA,
+	"KEY_ONSCREEN_KEYBOARD":        KEY_ONSCREEN_KEYBOARD,
 	"BTN_TRIGGER_HAPPY":            BTN_TRIGGER_HAPPY,
 	"BTN_TRIGGER_HAPPY1":           BTN_TRIGGER_HAPPY1,
 	"BTN_TRIGGER_HAPPY2":           BTN_TRIGGER_HAPPY2,

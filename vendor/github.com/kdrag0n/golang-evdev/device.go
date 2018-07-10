@@ -139,7 +139,7 @@ func (dev *InputDevice) set_device_capabilities() error {
 		if evbits[evtype/8]&(1<<uint(evtype%8)) != 0 {
 			eventcodes := make([]CapabilityCode, 0)
 
-			ioctl(dev.File.Fd(), uintptr(EVIOCGBIT(evtype, KEY_MAX)), unsafe.Pointer(codebits))
+			ioctl(dev.File.Fd(), uintptr(EVIOCGBIT(uint(evtype), KEY_MAX)), unsafe.Pointer(codebits))
 			for evcode := 0; evcode < KEY_MAX; evcode++ {
 				if codebits[evcode/8]&(1<<uint(evcode%8)) != 0 {
 					c := CapabilityCode{evcode, ByEventType[evtype][evcode]}

@@ -3,9 +3,9 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/gvalkov/golang-evdev"
+  name = "github.com/kdrag0n/golang-evdev"
   packages = ["."]
-  revision = "b6f418b1fe5af0386c81f387227f36d4801883b0"
+  revision = "058c5a05285c949f9a6afd526a2f875da22f8215"
 
 [[projects]]
   name = "github.com/mattn/go-isatty"
@@ -41,6 +41,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2c0485ec724aa76751bc9644607a7c31ab9cb489f2e88a03048d8494034813d5"
+  inputs-digest = "d1e0285f6bdb0f77e8842a0fc0c20876a56444a521bf29da0b626b68298f8018"
   solver-name = "gps-cdcl"
   solver-version = 1

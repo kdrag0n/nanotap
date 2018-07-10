@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	evdev "github.com/gvalkov/golang-evdev"
+	evdev "github.com/kdrag0n/golang-evdev"
 )
 
 func ProbeInputDevice(verbosity uint) (path string, err error) {
