@@ -16,7 +16,7 @@ devloop:
 	for _, dev := range devices {
 		log.Info().Str("path", dev.Fn).Str("name", dev.Name).Str("phys", dev.Phys).Msg("Found device")
 		if verbosity > 0 {
-			log.Info().Uint16("bustype", dev.Bustype).Uint16("vendor", dev.Vendor).Uint16("product", dev.Product).Uint16("version", dev.Version).Int("evVersion", dev.EvdevVersion).Msg("ID")
+			log.Info().Uint16("bustype", dev.Bustype).Uint16("vendor", dev.Vendor).Uint16("product", dev.Product).Uint16("version", dev.Version).Msg("ID")
 		}
 
 		for cType, cCodes := range dev.Capabilities {
