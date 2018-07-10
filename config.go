@@ -1,14 +1,23 @@
 package main
 
+//go:generate go-bindata -nomemcopy -nometadata -nocompress -o bindata.go config.toml
+
 import (
 	"io/ioutil"
 
 	toml "github.com/pelletier/go-toml"
 )
 
-var DefaultConfig = Config{
-	InputDevice: "/dev/input/event0",
-	MaxFingers:  10,
+var DefaultConfig Config
+
+func init() {
+	bConfig, err := Asset("config.toml")
+	checkMsg(err, "Unable to load default config")
+
+	config, err := ParseConfig(bConfig)
+	checkMsg(err, "Unable to parse default config")
+
+	DefaultConfig = config
 }
 
 type Config struct {
