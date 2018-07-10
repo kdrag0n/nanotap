@@ -3,6 +3,6 @@ cd /data/local/tmp
 rm -fr nt
 mkdir nt
 cd nt
-mv ../config.toml ../nanotap .
+cp ../config.toml ../nanotap .
 echo 'Starting program'
 ./nanotap
