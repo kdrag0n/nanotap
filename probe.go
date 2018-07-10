@@ -14,7 +14,7 @@ func ProbeInputDevice(verbosity uint) (path string, err error) {
 
 devloop:
 	for _, dev := range devices {
-		log.Info().Str("path", dev.Fn).Str("name", dev.Name).Str("phys", dev.Phys).Msg("Found device")
+		log.Debug().Str("path", dev.Fn).Str("name", dev.Name).Str("phys", dev.Phys).Msg("Found device")
 
 		for cType, cCodes := range dev.Capabilities {
 			if verbosity > 0 {
