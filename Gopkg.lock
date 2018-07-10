@@ -5,7 +5,7 @@
   branch = "master"
   name = "github.com/kdrag0n/golang-evdev"
   packages = ["."]
-  revision = "058c5a05285c949f9a6afd526a2f875da22f8215"
+  revision = "8da5f50e6c4af43551c2ff1aa9c93cbdcd44e714"
 
 [[projects]]
   name = "github.com/mattn/go-isatty"

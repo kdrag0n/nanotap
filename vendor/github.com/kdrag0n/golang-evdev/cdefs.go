@@ -14,7 +14,6 @@ const (
 	EVIOCGKEYCODE_V2 = 2150122756
 	EVIOCSKEYCODE    = 1074283780
 	EVIOCSKEYCODE_V2 = 1076380932
-	EVIOCSFF         = 1076905344
 	EVIOCRMFF        = 1074021761
 	EVIOCGEFFECTS    = 2147763588
 	EVIOCGRAB        = 1074021776
@@ -29,8 +28,17 @@ const (
 	EVIOCGSW         = 2164278555
 )
 
+var EVIOCSFF uint = 1076905344
+
+func init() {
+	var bitTest int
+	if unsafe.Sizeof(bitTest) == 4 {
+		EVIOCSFF = 1076643200
+	}
+}
+
 func EVIOCGBIT(ev, l uint) uint {
-	return (2 << (0+8+8+14)) | (69 << (0+8)) | ((0x20 + ev) << 0) | (l << (0+8+8))
+	return (2 << (0 + 8 + 8 + 14)) | (69 << (0 + 8)) | ((0x20 + ev) << 0) | (l << (0 + 8 + 8))
 }
 
 func ioctl(fd uintptr, name uintptr, data unsafe.Pointer) syscall.Errno {
