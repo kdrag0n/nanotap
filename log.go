@@ -22,8 +22,10 @@ func init() {
 		zlog.Warn().Int("count", missed).Msg("Dropped messages")
 	})
 
-	log = zerolog.New(dwr)
+	log = zerolog.New(dwr).With().Timestamp().Logger()
 	if isTerminal {
 		log = log.Output(zerolog.ConsoleWriter{Out: os.Stdout})
 	}
+
+	zerolog.TimeFieldFormat = "Mon Jan 2 15:04:05"
 }
