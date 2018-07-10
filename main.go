@@ -17,6 +17,8 @@ func checkMsg(e error, msg string) {
 }
 
 func main() {
+	ParseArgs()
+
 	config, err := LoadConfigFile("config.toml")
 	if err != nil {
 		log.Warn().Err(err).Msg("Unable to load config, using defaults")

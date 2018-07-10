@@ -33,6 +33,12 @@
   version = "v1.8.0"
 
 [[projects]]
+  name = "github.com/spf13/pflag"
+  packages = ["."]
+  revision = "583c0c0531f06d5278b7d917446061adc344b5cd"
+  version = "v1.0.1"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
@@ -41,6 +47,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "d1e0285f6bdb0f77e8842a0fc0c20876a56444a521bf29da0b626b68298f8018"
+  inputs-digest = "9af53aa0c91f9fe73e8cff466d8086f6b2e8a36e49990a88b9a5213ce8b7b9e9"
   solver-name = "gps-cdcl"
   solver-version = 1
