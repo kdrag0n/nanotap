@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	flag "github.com/spf13/pflag"
 )
 
@@ -12,8 +15,8 @@ var (
 	argRequireConfig bool
 
 	// config overrides
-	argInputDevice string
-	argMaxFingers  uint32
+	argInputDevice *string
+	argMaxFingers  *uint32
 )
 
 func ParseArgs() {
@@ -24,8 +27,17 @@ func ParseArgs() {
 	flag.BoolVarP(&argRequireConfig, "require-config", "r", false, "exit if config reading fails, use defaults otherwise")
 
 	// config overrides
-	flag.StringVarP(&argInputDevice, "input-device", "i", DefaultConfig.InputDevice, "input device to read events from, 'auto' to auto-detect")
-	flag.Uint32VarP(&argMaxFingers, "max-fingers", "f", DefaultConfig.MaxFingers, "maximum number of fingers to support")
+	cflags := flag.NewFlagSet("Config overrides", flag.ExitOnError)
+	argInputDevice = cflags.StringP("input-device", "i", DefaultConfig.InputDevice, "input device to read events from, 'auto' to auto-detect")
+	argMaxFingers = cflags.Uint32P("max-fingers", "f", DefaultConfig.MaxFingers, "maximum number of fingers to support")
+
+	flag.Usage = func() {
+		fmt.Fprintln(os.Stderr, "Nanotap: Fluid Gestures for Android, by @kdrag0n\n\nUsage:")
+		flag.PrintDefaults()
+		fmt.Fprintln(os.Stderr, "\nConfiguration override flags:")
+		cflags.PrintDefaults()
+	}
 
 	flag.Parse()
+	cflags.Parse(os.Args)
 }

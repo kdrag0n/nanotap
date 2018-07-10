@@ -17,13 +17,23 @@ func checkMsg(e error, msg string) {
 }
 
 func main() {
-	ParseArgs()
+	parseArgs()
 
-	config, err := LoadConfigFile("config.toml")
+	if argWriteConfig {
+	} else if argProbeMode {
+	}
+
+	config, err := LoadConfigFile(argConfigPath)
 	if err != nil {
+		if argRequireConfig {
+			log.Panic().Err(err).Msg("Unable to load config")
+		}
+
 		log.Warn().Err(err).Msg("Unable to load config, using defaults")
 		config = DefaultConfig
 	}
+
+	//processConfigOverrides(&config)
 	log.Print("Loaded config")
 
 	if config.InputDevice == "auto" {
