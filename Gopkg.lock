@@ -3,6 +3,12 @@
 
 [[projects]]
   branch = "master"
+  name = "code.cloudfoundry.org/go-diodes"
+  packages = ["."]
+  revision = "361f4b34988b402fbf4d5b744cc9b35959c2ac4e"
+
+[[projects]]
+  branch = "master"
   name = "github.com/kdrag0n/golang-evdev"
   packages = ["."]
   revision = "8da5f50e6c4af43551c2ff1aa9c93cbdcd44e714"
@@ -23,8 +29,6 @@
   name = "github.com/rs/zerolog"
   packages = [
     ".",
-    "diode",
-    "diode/internal/diodes",
     "internal/cbor",
     "internal/json",
     "log"
@@ -47,6 +51,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "9af53aa0c91f9fe73e8cff466d8086f6b2e8a36e49990a88b9a5213ce8b7b9e9"
+  inputs-digest = "cccd020212d9c1801035f86370fadfee3a80867e764ec7e341a56d0965dbabc7"
   solver-name = "gps-cdcl"
   solver-version = 1
