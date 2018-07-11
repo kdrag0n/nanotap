@@ -31,7 +31,7 @@ const (
 )
 
 type Event struct {
-	Finger     uint32
+	Slot       uint32
 	Type       uint16
 	Time       time.Time
 	FingerDown bool

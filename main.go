@@ -79,6 +79,6 @@ func main() {
 			typeStr = "move"
 		}
 
-		log.Debug().Uint32("x", event.X).Uint32("y", event.Y).Str("action", typeStr).Msgf("Event @ (%4d, %4d)", event.X, event.Y)
+		log.Debug().Uint32("x", event.X).Uint32("y", event.Y).Uint32("slot", event.Slot).Str("action", typeStr).Msgf("Event @ (%4d, %4d)", event.X, event.Y)
 	}
 }

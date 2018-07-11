@@ -28,7 +28,7 @@ func DecodeRawEvent(r RawEvent, ev *Event) (err error) {
 	case RawEvAbs:
 		switch r.Code {
 		case RawAbsMtSlot:
-			ev.Finger = r.Value
+			ev.Slot = r.Value
 		case RawAbsMtPositionX:
 			ev.X = r.Value
 		case RawAbsMtPositionY:
@@ -48,14 +48,14 @@ func DecodeRawEvent(r RawEvent, ev *Event) (err error) {
 	return
 }
 
-func ReadEvents(maxFingers uint32, f *os.File, ch chan Event) {
+func ReadEvents(maxSlots uint32, f *os.File, ch chan Event) {
 	buf := make([]byte, RawEventSize)
-	slots := make([]*Event, maxFingers)
+	slots := make([]*Event, maxSlots)
 	var currentSlot uint32
 
 	for slot, _ := range slots {
 		slots[slot] = &Event{
-			Finger: uint32(slot),
+			Slot: uint32(slot),
 		}
 	}
 
@@ -71,9 +71,9 @@ func ReadEvents(maxFingers uint32, f *os.File, ch chan Event) {
 			continue
 		}
 
-		currentSlot = event.Finger
-		if currentSlot > maxFingers-1 {
-			currentSlot = maxFingers - 1
+		currentSlot = event.Slot
+		if currentSlot > maxSlots-1 {
+			currentSlot = maxSlots - 1
 		}
 
 		ch <- *event
