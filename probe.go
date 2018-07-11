@@ -18,7 +18,7 @@ devloop:
 
 		for cType, cCodes := range dev.Capabilities {
 			if verbosity > 0 {
-				log.Printf("Capability: %d %s", cType.Type, cType.Name)
+				log.Debug().Int("type", cType.Type).Str("name", cType.Name).Msg("Found capability")
 				if verbosity > 1 {
 					fmt.Print("Codes: ")
 					for _, cCode := range cCodes {
