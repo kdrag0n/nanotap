@@ -27,5 +27,9 @@ func init() {
 		log = log.Output(zerolog.ConsoleWriter{Out: os.Stdout})
 	}
 
-	zerolog.TimeFieldFormat = "Mon Jan 2 15:04:05"
+	if isTerminal {
+		zerolog.TimeFieldFormat = "Mon Jan 2 15:04:05"
+	} else {
+		zerolog.TimeFieldFormat = ""
+	}
 }
