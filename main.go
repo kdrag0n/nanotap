@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io/ioutil"
 	"os"
 )
 
@@ -20,7 +21,19 @@ func main() {
 	parseArgs()
 
 	if argWriteConfig {
+		cfgBytes, err := Asset("config.toml")
+		checkMsg(err, "Unable to load default config")
+
+		log.Info().Msg("Writing default config to config.toml...")
+		err = ioutil.WriteFile("config.toml", cfgBytes, 644)
+		checkMsg(err, "Unable to write config")
+
+		log.Info().Msg("Config written")
+		return
 	} else if argProbeMode {
+		log.Info().Msg("Probing devices...")
+		ProbeInputDevice(1)
+		return
 	}
 
 	config, err := LoadConfigFile(argConfigPath)
@@ -33,8 +46,8 @@ func main() {
 		config = DefaultConfig
 	}
 
-	//processConfigOverrides(&config)
-	log.Print("Loaded config")
+	overwritten := processConfigOverrides(&config)
+	log.Debug().Uint("overwritten", overwritten).Msg("Loaded config")
 
 	if config.InputDevice == "auto" {
 		log.Info().Msg("Auto-detecting input device...")
