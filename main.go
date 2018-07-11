@@ -79,6 +79,6 @@ func main() {
 			typeStr = "move"
 		}
 
-		log.Printf("Finger %d (%4d, %4d) %s", event.Finger, event.X, event.Y, typeStr)
+		log.Debug().Uint32("x", event.X).Uint32("y", event.Y).Str("action", typeStr).Msgf("Event @ (%4d, %4d)", event.X, event.Y)
 	}
 }
