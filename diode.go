@@ -29,7 +29,7 @@ import (
 	"io"
 	"sync"
 
-	"code.cloudfoundry.org/go-diodes"
+	"github.com/kdrag0n/go-diodes"
 )
 
 var bufPool = &sync.Pool{

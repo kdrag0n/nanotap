@@ -3,9 +3,9 @@
 
 [[projects]]
   branch = "master"
-  name = "code.cloudfoundry.org/go-diodes"
+  name = "github.com/kdrag0n/go-diodes"
   packages = ["."]
-  revision = "361f4b34988b402fbf4d5b744cc9b35959c2ac4e"
+  revision = "894b5a8347853c61ecef814a5c323fec76ee7208"
 
 [[projects]]
   branch = "master"
@@ -51,6 +51,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "cccd020212d9c1801035f86370fadfee3a80867e764ec7e341a56d0965dbabc7"
+  inputs-digest = "939d9cc17943121526e86dc2669073e0bc44abf5cf8b89b89be8bbaceb055023"
   solver-name = "gps-cdcl"
   solver-version = 1
